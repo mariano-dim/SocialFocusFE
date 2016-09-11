@@ -1,0 +1,29 @@
+@import "header";
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#home {
+
+  .input-group-addon {
+    cursor: pointer;
+  }
+
+  table {
+    margin: 40px 0 0 0;
+
+    th {
+      text-align: center;
+    }
+
+    td:last-child {
+      text-align: center;
+    }
+  }
+}
+
+#detail {
+  padding: 90px 0;
+}
