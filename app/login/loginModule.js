@@ -6,10 +6,12 @@ var sfLoginModule = angular.module('socialFocusApp.loginModule', ['ngRoute'])
       templateUrl: 'login/login.html',
       controller: 'loginCtrl'
     });
-  }]).controller('loginCtrl', ['$scope', '$location','usuarioService', loginCtrlFunction]);
+  }]).controller('loginCtrl', ['$scope', '$location', 'usuarioService', loginCtrlFunction]);
 
 
 function loginCtrlFunction($scope, $location, usuario) {
+
+  console.log("loginCtrlFunction");
 
   $scope.usuario = {
     email: '',
@@ -18,7 +20,7 @@ function loginCtrlFunction($scope, $location, usuario) {
 
   $scope.getUsuarios = function () {
 
-    console.log("Test");
+    console.log("getUsuarios");
     console.log($scope.usuario.email);
     console.log($scope.usuario.password);
 

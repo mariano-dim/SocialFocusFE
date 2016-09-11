@@ -2,17 +2,20 @@
 
 angular.module('socialFocusApp.dashboardModule', ['ngRoute'])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/dashboard', {
-    templateUrl: 'dashboard/dashboard.html',
-    controller: 'dashboardCtrl'
-  });
-}]).controller('dashboardCtrl', ['$scope','usuarioService', dasboardCtrlFunction]);
+  .config(['$routeProvider', function ($routeProvider) {
+    $routeProvider.when('/dashboard', {
+      templateUrl: 'dashboard/dashboard.html',
+      controller: 'dashboardCtrl'
+    });
+  }]).controller('dashboardCtrl', ['$scope', 'usuarioService', dasboardCtrlFunction]);
 
 function dasboardCtrlFunction($scope, usuario) {
 
-  $scope.getUsuarios = function () {
-    console.log("Test");
+  console.log("dasboardCtrlFunction");
+
+  $scope.init = function () {
+    console.log("init");
+
     usuario.getUsuarios(function (data) {
       console.log(data);
       $scope.usuarios = data;
@@ -20,4 +23,8 @@ function dasboardCtrlFunction($scope, usuario) {
       console.log(error);
     });
   }
+
+  // init the page
+  $scope.init();
+
 }
