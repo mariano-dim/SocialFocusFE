@@ -1,0 +1,35 @@
+<section>
+        <div class="container">
+
+            <div class="top">
+                <h1 id="title" class="hidden"><span id="logo">Social <span>FOCUS</span></span>
+                </h1>
+            </div>
+            <div class="login-box animated fadeInUp">
+                
+                <div class="box-header">
+                    <h2>Log In</h2>
+                </div>
+
+                <label for="username">Usuario</label>
+                <br/>
+                <input type="email" id="usuario" [(ngModel)]="usuarioCredentials.email">
+
+                <br/>
+                <label for="password">Clave</label>
+                <br/>
+                <input type="password" id="clave" [(ngModel)]="usuarioCredentials.clave">
+
+                <br/>
+                <button (click)="login()">Log In</button>
+
+                <br/>
+                <a href="#">
+                    <p class="small">Olvido su clave?</p>
+                </a>
+                <a href="#">
+                    <p class="small">No tengo usuario</p>
+                </a>                
+            </div>
+        </div>
+</section>
