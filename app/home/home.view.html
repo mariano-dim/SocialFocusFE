@@ -1,0 +1,23 @@
+﻿<div id="RS-buttons">
+
+<button id="sign-in-tw" onclick="twitterSignin()"><img src="../../../../images/twit_icon2.png" />Adjuntar cuenta de Twitter</button>
+<button hidden id="sign-out-tw" onclick="twitterSignout()"><img src="../../../../images/twit_icon2.png" />Desvincular cuenta</button>
+
+<button id="sign-in-fb" onclick="facebookSignin()"><img src="../../../../images/facebook_icon2.png" />Adjuntar cuenta de Facebook</button>
+<button hidden id="sign-out-fb" onclick="facebookSignout()"><img src="../../../../images/facebook_icon2.png" />Desvincular cuenta</button>
+
+</div>
+
+<div id="central"><h2>Hola {{vm.user.email}}!</h2>
+	<p>Login exitoso!!</p>
+	<p><div id="msj"></div></p>
+	<p>&nbsp;</p>
+	<p><a href="#/login" class="btn btn-primary" ng-click="vm.logout();">Salir</a></p>
+</div>
+
+<div class="break"></div>
+
+
+
+
+
