@@ -8,12 +8,15 @@
 
 </div>
 
-<div id="central"><h2>Hola {{vm.user.email}}!</h2>
-	<p>Login exitoso!!</p>
+<div id="central"><h2>Hola <span id="">{{vm.user.email}}!</span></h2>
+	<p>&nbsp;</p>
 	<p><div id="msj"></div></p>
+	<p><div id="msj2"></div></p>
 	<p>&nbsp;</p>
 	<p><a href="#/login" class="btn btn-primary" ng-click="vm.logout();">Salir</a></p>
 </div>
+
+<input type="hidden" id="tt" value="{{vm.user.email}}" /> 
 
 <div class="break"></div>
 

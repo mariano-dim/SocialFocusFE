@@ -151,10 +151,12 @@
 	
     <div class="jumbotron">
         <div class="container">
+			
             <div class="col-sm-12 col-sm-offset-1">
                 <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
                 <div ng-view></div>
             </div>
+			<div id="test"></div>
         </div>
     </div>
 	
@@ -192,6 +194,9 @@
 		messagingSenderId: "224486401745"
 	  };
 	  firebase.initializeApp(config);
+	</script>
+	<script>
+		$('#test').html("Hola");
 	</script>
 	<script type="text/javascript" src="scripts/main.js"></script>
 </body>
