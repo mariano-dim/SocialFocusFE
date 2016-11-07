@@ -1,0 +1,185 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prueba de Creacion de Tweet</title>
+    
+	<!--CSS Bootstrap-->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+	<style>
+		
+		#contenedor{
+			width:60%;
+				margin: 20px 15px;
+		}
+		textarea{
+			width: 100%;
+			height: 400 px;
+		
+		}
+		
+		.der{
+			padding-top: 5px;
+			float:right;
+		}
+		
+		#tweets{
+			padding-top: 10px;
+			display: none;
+		}
+		
+		#muestraTL{
+		padding-top: 10px;
+			display: none;
+		}
+		
+		#creaPost{
+		padding-top: 10px;
+			display: none;
+		}
+		
+		#notifier{
+		padding-top: 10px;	
+			color:green;
+			font-weight:strong;
+		}
+	
+	</style>
+</head>
+
+<body onload="javascript:starter();">
+	<div id="contenedor">
+		
+		<div id="barra">
+		
+			<button onclick="javascript:showDiv('tweets')">Mostrar Tweets</button></a> | <a href="#muestraTL" onclick="javascript:showDiv('muestraTL')">Mostrar Timeline</a> | <a href="#creaPost" onclick="javascript:showDiv('creaPost')">Publicar Tweets</a>
+			
+		</div>
+		
+		<div id="tweets">
+			A
+		</div>
+		<div id="muestraTL">
+			B
+		</div>
+		<div id="creaPost">
+			<div id="notifier"></div>
+			<form method="post" action="javascript:procesar()">
+				<textarea id="post" placeholder="Escribir contenido del Tweet..."></textarea><br />
+				<div class="der"><button type="submit">Postear</button></div>
+			</form>
+		</div>
+	</div>
+	
+	<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+	
+	<script>
+	
+		function showDiv(id){
+			clean();
+			$('#'+id+'').css("display", "block");
+		}
+		
+		function clean(){
+			$("#tweets").css("display", "none");
+			$("#muestraTL").css("display", "none");
+			$("#creaPost").css("display", "none");
+		}
+		
+		function starter(){
+			ownTweets();
+			getTimeline();
+		}
+		
+		function ownTweets(){
+			var twits = [];
+			
+			//HARCODEO:
+			var user="SocialFocus"; 
+			var userSF="damian@prueba.com";
+			
+			 $.ajax({
+				 type: "GET",
+				 url: "http://localhost:8080/api/tweets/UserTimeline/_" + user +"?email="+ userSF,
+				 dataType: 'json',
+				 timeout: 600000,
+				 success:  function(resp){
+					twits=resp;
+					 var content="";
+					for (i = 0; i<=twits.length-1;i++){
+						content += "<img src='"+twits[i].user.profileImageURL+"' align='left' /><strong>"+twits[i].user.name+"</strong><br /><br />"+twits[i].text+"<br /> <br />";
+					}
+			 
+					$('#tweets').html(content);
+					
+					
+				 },
+				 error: function(e) {
+					 $('#tweets').html("Obtencion de Tweets fallo");
+				 }
+			 });
+		}
+
+		//OBTENER TIMELINE GENERAL
+		function getTimeline(){
+			
+			var twits = [];
+			
+			//HARCODEO:
+			var userSF="damian@prueba.com";
+			
+			 $.ajax({
+				 type: "GET",
+				 url: "http://localhost:8080/api/tweets/email/" + userSF,
+				 dataType: 'json',
+				 timeout: 600000,
+				 success:  function(resp){
+					twits=resp;
+					 var content="";
+					for (i = 0; i<=twits.length-1;i++){
+						content += "<img src='"+twits[i].user.profileImageURL+"' align='left' /><strong>"+twits[i].user.name+"</strong><br /><br />"+twits[i].text+"<br /> <br />";
+					}
+			 
+					$('#muestraTL').html(content);
+										
+				 },
+				 error: function(e) {
+					 $('#muestraTL').html("Obtencion de Timeline fallo");
+				 }
+			 });
+			
+		}
+		
+		
+		function procesar(){
+			
+			//usuario hardcodeado
+			 var userSF="damian@prueba.com";
+			
+			var datos = {}
+			 datos["email"] = userSF;
+			 datos["socialnetwork"]= "Twitter";
+			 datos["texto"]= $('#post').val();
+			 
+	 
+			 $.ajax({
+				 type: "POST",
+				 contentType: "application/json",
+				 url: "http://localhost:8080/api/tweets/Create",
+				 data: JSON.stringify(datos),
+				 dataType: 'json',
+				 timeout: 600000,
+				 success:  function(data){
+					$('#notifier').html("El mensaje se generó correctamente.");
+					ownTweets();
+				 },
+				 error: function(e) {
+					 alert("ERROR");
+				 }
+			 });
+		}
+	
+	</script>
+</body>
+</html>
