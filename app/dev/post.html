@@ -10,8 +10,11 @@
 	<style>
 		
 		#contenedor{
-			width:60%;
-				margin: 20px 15px;
+			width:70%;
+			height: 600px;
+			margin: 20px 15px;
+			float: left;
+			overflow-y:auto;
 		}
 		textarea{
 			width: 100%;
@@ -26,6 +29,7 @@
 		
 		#tweets{
 			padding-top: 10px;
+			width: 600px;
 			display: none;
 		}
 		
@@ -35,7 +39,7 @@
 		}
 		
 		#creaPost{
-		padding-top: 10px;
+			padding-top: 10px;
 			display: none;
 		}
 		
@@ -44,32 +48,90 @@
 			color:green;
 			font-weight:strong;
 		}
+		
+		.profileimage {
+			float:left;
+			margin:5px;
+			padding-right:5px;
+			
+		}
+		
+		.post {
+			position: relative;
+			left:10px;
+			width:500px;
+			border: 1px gray solid;
+			float:left;
+			padding-left: 5px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
 	
 	</style>
 </head>
 
 <body onload="javascript:starter();">
-	<div id="contenedor">
+
+	<!--Barra superior-->
+	<div class="navbar navbar-inverse navbar-fixed-top" id="navContainer">
+	
+		<div class="container">
+		
+			<div class="navbar-header">
+				
+				
+				<a class="navbar-brand"><span class="glyphicon glyphicon-user" style="padding-right:5px;"></span>Social Focus</a>
+				
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				
+				<span class="sr-only">Toggle navigation</span>
+				
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				
+				</button>
+			
+			</div>
+			
+			<div class="collapse navbar-collapse" style="float:right">
+				<ul class="nav navbar-nav">
+				
+					<li class="active"><a href="index.html">< Volver</a></li>
+				
+				</ul>
+				<
+			</div>
+		</div>
+	</div>
+	
+	<div class="jumbotron">
+	<div id="contenedor" class="container">
 		
 		<div id="barra">
-		
-			<button onclick="javascript:showDiv('tweets')">Mostrar Tweets</button></a> | <a href="#muestraTL" onclick="javascript:showDiv('muestraTL')">Mostrar Timeline</a> | <a href="#creaPost" onclick="javascript:showDiv('creaPost')">Publicar Tweets</a>
+			<ul class="nav nav-pills">
+			  <li role="presentation"><a href="#tweets" onclick="javascript:showDiv('tweets')">Mostrar Tweets</a></li>
+			  <li role="presentation"><a href="#muestraTL" onclick="javascript:showDiv('muestraTL')">Mostrar L&iacute;nea de Tiempo</a></li>
+			  <li role="presentation"><a href="#creaPost" onclick="javascript:showDiv('creaPost')">Publicar Tweets</a></li>
+			</ul>
+			<!--<button onclick="javascript:showDiv('tweets')">Mostrar Tweets</button></a> | <a href="#muestraTL" onclick="javascript:showDiv('muestraTL')">Mostrar Timeline</a> | <a href="#creaPost" onclick="javascript:showDiv('creaPost')">Publicar Tweets</a>-->
 			
 		</div>
 		
 		<div id="tweets">
-			A
+			
 		</div>
 		<div id="muestraTL">
-			B
+			
 		</div>
 		<div id="creaPost">
 			<div id="notifier"></div>
 			<form method="post" action="javascript:procesar()">
 				<textarea id="post" placeholder="Escribir contenido del Tweet..."></textarea><br />
-				<div class="der"><button type="submit">Postear</button></div>
+				<div class="der"><button type="submit">Publicar</button></div>
 			</form>
 		</div>
+	</div>
 	</div>
 	
 	<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
@@ -106,9 +168,10 @@
 				 timeout: 600000,
 				 success:  function(resp){
 					twits=resp;
+					//alert(JSON.stringify(twits[0],null,4));
 					 var content="";
 					for (i = 0; i<=twits.length-1;i++){
-						content += "<img src='"+twits[i].user.profileImageURL+"' align='left' /><strong>"+twits[i].user.name+"</strong><br /><br />"+twits[i].text+"<br /> <br />";
+						content += "<div class='post'><img class='profileimage' src='"+twits[i].user.profileImageURL+"' /><strong>"+twits[i].user.name+"</strong><br />"+twits[i].text+"</div>";
 					}
 			 
 					$('#tweets').html(content);

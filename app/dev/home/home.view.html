@@ -5,7 +5,7 @@
 
 <button id="sign-in-fb" onclick="facebookSignin()"><img src="../../../../images/facebook_icon2.png" />Adjuntar cuenta de Facebook</button>
 <button hidden id="sign-out-fb" onclick="facebookSignout()"><img src="../../../../images/facebook_icon2.png" />Desvincular cuenta</button>
-
+<p><a href="#/login" class="btn btn-primary" ng-click="vm.logout();">Salir</a></p>
 </div>
 
 <div id="central"><h2>Hola <span id="">{{vm.user.email}}!</span></h2>
@@ -15,10 +15,35 @@
 	<p>&nbsp;</p>
 	
 </div>
-<div id="inferior"><p><a href="#/login" class="btn btn-primary" ng-click="vm.logout();">Salir</a></p></div>
+<div id="inferior"></div>
 <input type="hidden" id="tt" value="{{vm.user.email}}" /> 
 
 <div class="break"></div>
+
+<script>
+//Chequear si el usuario tiene redes sociales asociadas
+function checkToken(){
+	
+	$.ajax({
+		 type: "GET",
+		 url: "http://localhost:8080/api/usuario/token/twitter/email/" + $('#tt').val(),
+		 dataType: 'json',
+		 timeout: 600000,
+		 success:  function(resp){
+			
+			 alert('Tiene RS');
+			
+		 },
+		 error: function(e) {
+			alert('No tiene RS');
+		 }
+	 });
+	
+}
+
+
+
+</script>
 
 
 
