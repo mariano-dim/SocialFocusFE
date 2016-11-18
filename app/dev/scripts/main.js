@@ -47,6 +47,48 @@ function googleSignout() {
 }*/
 
 //Defino proveedor para autencación en Twitter
+var provider = new firebase.auth.FacebookAuthProvider();
+
+
+//twitterSignin: Mismo caso que googleSignin, pero para twitter
+function facebookSignin() {
+   firebase.auth().signInWithPopup(provider).then(function(result) {
+	   
+      var token = result.credential.accessToken;
+	  var user = result.user.displayName;
+	  var userPic = result.user.photoURL;
+	  var secret = result.credential.secret;
+	 
+	  var userPic = document.getElementById('user-pic-fb');
+	  var userName = document.getElementById('user-name-fb');
+	  var sobutton = document.getElementById('sign-out-fb');
+	  var sibutton = document.getElementById('sign-in-fb');
+	  
+	  setPic(sobutton,sibutton);
+	  
+	  $('#msj').html("Acceso a Facebook satisfactorio!<br /><br /><strong>Access Token:</strong> "+token+"<br /><br />");
+		
+	 
+	 //TEST
+	 var userSF = $('#tt').val(); 
+	 var datos = {}
+	 datos["email"] = userSF;
+	 datos["socialnetwork"]= "Facebook";
+	 datos["usuariors"]= user;
+	 datos["fotors"]= userPic;
+	 datos["token"]= token;
+	 
+	 
+	 enviaAPI(datos,'msj2');
+	 	   	  
+   }).catch(function(error) {
+      console.log(error.code)
+      console.log(error.message)
+   });
+}
+
+
+//Defino proveedor para autencación en Twitter
 var provider2 = new firebase.auth.TwitterAuthProvider();
 
 
@@ -78,7 +120,10 @@ function twitterSignin() {
 	 datos["token"]= token;
 	 datos["secret"]= secret;
 	 
-	 $.ajax({
+	 enviaAPI(datos,'msj2');
+	 
+	 
+	 /*$.ajax({
 		 type: "POST",
 		 contentType: "application/json",
 		 url: "http://localhost:8080/api/usuario/push",
@@ -122,6 +167,24 @@ function twitterSignin() {
       console.log(error.code)
       console.log(error.message)
    });
+}
+
+//ENVIA DATOS A API Rest
+function enviaAPI(datos, msj){
+	$.ajax({
+			 type: "POST",
+			 contentType: "application/json",
+			 url: "http://localhost:8080/api/usuario/push",
+			 data: JSON.stringify(datos),
+			 dataType: 'json',
+			 timeout: 600000,
+			 success:  function(data){
+				$('#'+msj+'').html("<a href='post.html'>Acceder al Panel de Control de Redes Sociales</a>");
+			 },
+			 error: function(e) {
+				 $('#'+msj+'').html("Carga token fallo");
+			 }
+		 });
 }
 
 //OBTENER TWEETS PROPIOS
@@ -197,7 +260,38 @@ function twitterSignout() {
 	  var userSF = $('#tt').val();
 	  $.ajax({
 		 type: "DELETE",
-		 url: "http://localhost:8080/api/usuario/token/" + userSF,
+		 url: "http://localhost:8080/api/usuario/token/" + userSF + "/Twitter",
+		 success:  function(data){
+			$('#msj2').html("Borrado token OK");
+		 },
+		 error: function(e) {
+			 $('#msj2').html("Borrado token fallo");
+		 }
+	 });
+	  
+   }, function(error) {
+      console.log('Signout failed!')
+   });
+   
+   document.getElementById("msj").innerHTML="";
+}
+
+function facebookSignout() {
+   firebase.auth().signOut()
+   
+   .then(function() {
+      console.log('Signout successful!')
+	  
+	  var sobutton = document.getElementById('sign-out-fb');
+	  var sibutton = document.getElementById('sign-in-fb');
+	  
+	  unSetPic(sobutton,sibutton);
+	  
+	  //borrar token de base
+	  var userSF = $('#tt').val();
+	  $.ajax({
+		 type: "DELETE",
+		 url: "http://localhost:8080/api/usuario/token/" + userSF + "/Facebook",
 		 success:  function(data){
 			$('#msj2').html("Borrado token OK");
 		 },
