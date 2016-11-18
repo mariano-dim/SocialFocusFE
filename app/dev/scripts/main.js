@@ -104,10 +104,9 @@ function twitterSignin() {
 	  var sobutton = document.getElementById('sign-out-tw');
 	  var sibutton = document.getElementById('sign-in-tw');
 	  
-	  //setPic(userName,userPic,sobutton,sibutton);
 	  setPic(sobutton,sibutton);
 		
-      //document.getElementById("msj").innerHTML="Acceso a Twitter satisfactorio!<br /><br /><strong>Access Token:</strong> "+token+" <br /><strong>Secret:</strong> "+secret+"<br /><br />";
+      
 	 $('#msj').html("Acceso a Twitter satisfactorio!<br /><br /><strong>Access Token:</strong> "+token+" <br /><strong>Secret:</strong> "+secret+"<br /><br />");
 	 
 	  //TEST
@@ -122,46 +121,6 @@ function twitterSignin() {
 	 
 	 enviaAPI(datos,'msj2');
 	 
-	 
-	 /*$.ajax({
-		 type: "POST",
-		 contentType: "application/json",
-		 url: "http://localhost:8080/api/usuario/push",
-		 data: JSON.stringify(datos),
-		 dataType: 'json',
-		 timeout: 600000,
-		 success:  function(data){
-			$('#msj2').html("<a href='post.html'>Acceder al Panel de Control de Redes Sociales</a>");
-		 },
-		 error: function(e) {
-			 $('#msj2').html("Carga token fallo");
-		 }
-	 });
-	 
-	 //MEGA TEST - Traer Twits
-	 /*var twits = [];
-	
-	 $.ajax({
-		 type: "GET",
-		 //url: "http://localhost:8080/api/tweets/email/" + userSF,
-		 url: "http://localhost:8080/api/tweets/UserTimeline/_" + user +"?email="+ userSF,
-		 dataType: 'json',
-		 timeout: 600000,
-		 success:  function(resp){
-			twits=resp;
-			 var content="";
-			for (i = 0; i<=twits.length-1;i++){
-				content += "<img src='"+twits[i].user.profileImageURL+"' align='left' /><strong>"+twits[i].user.name+"</strong><br /><br />"+twits[i].text+"<br /> <br />";
-			}
-	 
-			$('#msj').html(content);
-			$('#msj2').html('');
-			
-		 },
-		 error: function(e) {
-			 $('#msj2').html("Obtencion de Twitters fallo");
-		 }
-	 });*/
 	 	   	  
    }).catch(function(error) {
       console.log(error.code)
