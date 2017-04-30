@@ -28,7 +28,7 @@
                             response = { success: true };
 							//service.SetCredentials(user.email, password);
                         } else {
-                            response = { success: false, message: 'Usuario o password incorrecto!' };
+                            response = { success: false, message: 'Correo o contraseña incorrecto' };
                         }
                         callback(response);
                     });

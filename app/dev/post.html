@@ -3,38 +3,131 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Prueba de Creacion de Tweet</title>
+    <title>Administración de Redes Sociales</title>
     
 	<!--CSS Bootstrap-->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
 	<style>
+	
+	.post {
+		border:3px #E1E8ED solid;
+		border-radius: 5px;
+		width: 400px;
+	}
+	.profileimage {
+			float:left;
+			margin:5px;
+			padding-right:5px;
+			
+	}
+	
+	.rslogo {
+		float: right;
+		position:relative;
+		margin: 5px;
+	
+	}
+	
+	.nickname{
+		color: #000066;
+		font-weight:bold;
+		
+	}
+	
+	.content{
+		padding-top:15px;
+		padding-left:10px;
+		padding-right: 2px;
+	}
+	
+	.vals{
+		position:relative;
+		float: right;
+		margin: 5px;
+	}
+	
+	.plus{
+		color: green;
+		font-weight:bold;
+	}
+	
+	/* adicional */
 		
 		#contenedor{
+			position:absolute;
+			left:240px;
 			width:70%;
 			height: 600px;
 			margin: 20px 15px;
 			float: left;
 			overflow-y:auto;
 		}
+		
 		textarea{
 			width: 100%;
-			height: 400 px;
-		
+			height: 100px;
+			border-radius: 6px;
+			outline:none;
 		}
+		
+		textarea:focus{
+			box-shadow: inset 0 0 3px 2px #339CC3;
+		}
+		
 		
 		.der{
 			padding-top: 5px;
 			float:right;
 		}
 		
+		.der button{
+			border-radius: 2px;
+			margin-left:2px;
+			/*font-weight:bold;
+			color:#E1E8ED;
+			background-color:#339CC3;*/
+		}
+		
+		.izq{
+			padding-top: 5px;
+			float:left;
+		}
+		
 		#tweets{
+			position:relative;
+			left:100px;
+			padding-top: 10px;
+			width: 600px;
+			display: none;
+		}
+		
+		#fbposts{
+			padding-top: 10px;
+			width: 600px;
+			display: none;
+		}
+		
+		#fbTL{
+			position:relative;
+			left:100px;
 			padding-top: 10px;
 			width: 600px;
 			display: none;
 		}
 		
 		#muestraTL{
-		padding-top: 10px;
+			position:relative;
+			left:100px;
+			padding-top: 10px;
+			width: 600px;
+			display: none;
+		}
+		
+		#fbposts{
+			position:relative;
+			left:100px;
+			padding-top: 10px;
+			width: 600px;
 			display: none;
 		}
 		
@@ -42,11 +135,25 @@
 			padding-top: 10px;
 			display: none;
 		}
+
 		
 		#notifier{
-		padding-top: 10px;	
+			padding-top: 10px;	
 			color:green;
 			font-weight:strong;
+		}
+		
+		#notifier2{
+			padding-top: 10px;	
+			color:green;
+			font-weight:strong;
+		}
+		
+		.fbpimg{
+			position:relative;
+			left:120px;
+			width:200px;
+		
 		}
 		
 		.profileimage {
@@ -56,21 +163,88 @@
 			
 		}
 		
-		.post {
+		/*.post {
 			position: relative;
 			left:10px;
 			width:500px;
-			border: 1px gray solid;
+			border: 1px #E1E8ED solid;
 			float:left;
 			padding-left: 5px;
 			padding-top: 10px;
 			padding-bottom: 10px;
+		}*/
+		
+		#spfb{
+			border: 1px #4A6EA8 solid;
+			float:left;
+			display:none;
+			background-color:#4A6EA8;
+			border-radius:2px;
+		}
+		
+		#spfb img{
+			border-right: 2px;
+			border-right-color: white;
+			border-right-style:solid;
+		}
+		
+		#spfb input{
+			margin-left: 2px;
+			position:relative;
+			top:5px;
+		}
+		
+		#sptw{
+			border: 1px #62C8F8 solid;
+			float:left;
+			display:none;
+			margin-left: 5px;
+			background-color:#62C8F8;
+			border-radius:2px;
+		}
+		
+		#sptw img{
+			border-right: 2px;
+			border-right-color: white;
+			border-right-style:solid;
+		}
+		
+		#sptw input{
+			margin-left: 2px;
+			position:relative;
+			top:5px;
+		}
+		
+		input[type=checkbox]{
+			
+			height:20px;
+			width:20px;
+		}
+		
+		#test{
+			display:none;
+		}
+		
+		#notifybox{
+			position:relative;
+			top:50px;
+			border: 2px black solid;
+			border-radius: 2px;
+			backgroud-color: yellow;
+			display:none;
+		}
+		
+		#logo{
+			position: absolute;
+			top:0px;
+			width:150px;
+			
 		}
 	
 	</style>
 </head>
 
-<body onload="javascript:starter();">
+<body>
 
 	<!--Barra superior-->
 	<div class="navbar navbar-inverse navbar-fixed-top" id="navContainer">
@@ -80,7 +254,7 @@
 			<div class="navbar-header">
 				
 				
-				<a class="navbar-brand"><span class="glyphicon glyphicon-user" style="padding-right:5px;"></span>Social Focus</a>
+				<a class="navbar-brand"><span><img id="logo" src="../../../../images/Logo.png" /></span></a>
 				
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 				
@@ -109,61 +283,249 @@
 	<div id="contenedor" class="container">
 		
 		<div id="barra">
-			<ul class="nav nav-pills">
-			  <li role="presentation"><a href="#tweets" onclick="javascript:showDiv('tweets')">Mostrar Tweets</a></li>
-			  <li role="presentation"><a href="#muestraTL" onclick="javascript:showDiv('muestraTL')">Mostrar L&iacute;nea de Tiempo</a></li>
-			  <li role="presentation"><a href="#creaPost" onclick="javascript:showDiv('creaPost')">Publicar Tweets</a></li>
+			<ul id="links" class="nav nav-pills">
+			 
+			 <li id="mis_mensajes" role="presentation"><a href="#mensajes" onclick="javascript:showDiv('mensajes');">Mis mensajes</a></li> 
+			 <li id="test" role="presentation"><a href="#creaPost" onclick="javascript:showDiv('creaPost');">Realizar Publicaci&oacute;n</a></li> 
+			 <!-- <li role="presentation"><a href="#fbposts" onclick="javascript:showDiv('fbposts')">Mostrar Posts FB</a></li>-->
+			  
 			</ul>
 			<!--<button onclick="javascript:showDiv('tweets')">Mostrar Tweets</button></a> | <a href="#muestraTL" onclick="javascript:showDiv('muestraTL')">Mostrar Timeline</a> | <a href="#creaPost" onclick="javascript:showDiv('creaPost')">Publicar Tweets</a>-->
 			
 		</div>
 		
-		<div id="tweets">
+		<!--<div id="tweets">
 			
 		</div>
 		<div id="muestraTL">
 			
-		</div>
+		</div>-->
 		<div id="creaPost">
 			<div id="notifier"></div>
 			<form method="post" action="javascript:procesar()">
-				<textarea id="post" placeholder="Escribir contenido del Tweet..."></textarea><br />
-				<div class="der"><button type="submit">Publicar</button></div>
+				<textarea id="mensaje_nuevo" placeholder="Escribir contenido de la publicaciòn..."></textarea><br />
+				<div class="izq"><div id="spfb"><img src="../../../../images/facebook_icon2.png" /><input id="chfb" type="checkbox" /></div><div id="sptw"><img src="../../../../images/twit_icon2.png" /><input id="chtw" type="checkbox" /></div></div>
+				<div class="der">Cantidad de caracteres: <span id="contador"></span><button type="submit">Publicar</button></div>
+				<div id="notifybox" class="der">Mensaje</div>
 			</form>
 		</div>
+		<div id="mensajes">
+			<select name="redes_sociales" id="redes_sociales">
+					<option value="todas" selected>Todas las redes sociales</option>
+			</select>
+			<div id="contenido_mensajes">
+				<span id="notifier2">No hay redes sociales vinculadas a su perfil. Vincular.</span>
+			</div>
+		</div>
+		<!--<div id="fbTL">
+			
+		</div>-->
+		
 	</div>
 	</div>
 	
 	<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+	<script src="scripts/js.plugin.js"></script>
 	
 	<script>
-	
+		
+		$("#redes_sociales").change(function() {
+			if (this.value == "facebook"){
+				mensajesFacebook();
+			}
+			
+			if (this.value == "twitter"){
+				mensajesTwiter();
+			}
+		});
+		
 		function showDiv(id){
 			clean();
 			$('#'+id+'').css("display", "block");
 		}
 		
 		function clean(){
-			$("#tweets").css("display", "none");
-			$("#muestraTL").css("display", "none");
+			//$("#tweets").css("display", "none");
+			//$("#muestraTL").css("display", "none");
 			$("#creaPost").css("display", "none");
+			$("#mensajes").css("display", "none");
+			//$("#fbTL").css("display", "none");
 		}
+		
+		$ (document).ready(function(){
+			//valida la existencia de tokens de Twitter y Facebook
+			consultaAPI('http://socialfocus.com.ar:8080/api/usuario/token/fb/email/'+JSON.parse(Cookies.get('globals')).currentUser.username);
+			consultaAPI('http://socialfocus.com.ar:8080/api/usuario/token/twitter/email/'+JSON.parse(Cookies.get('globals')).currentUser.username);
+		});
+		
+		var oldVal = "";
+		$("#mensaje_nuevo").on("change keyup paste", function() {
+			var currentVal = $(this).val();
+			if(currentVal == oldVal) {
+				return; //evita varias ejecuciones
+			}
+
+			oldVal = currentVal;
+			
+			if (($("#mensaje_nuevo").val().length)>140){
+				$('#contador').css("color", "red");
+			} else{
+				$('#contador').css("color", "black");
+			}
+			
+			$('#contador').html(($("#mensaje_nuevo").val().length));
+			
+		});
 		
 		function starter(){
-			ownTweets();
-			getTimeline();
+			
+			alert(data);
 		}
 		
-		function ownTweets(){
+		function consultaAPI(urlapi){
+			var check;
+			$.ajax({
+				 type: "GET",
+				 url: urlapi,
+				 dataType: 'json',
+				 timeout: 600000,
+				 success:  function(resp){
+					if (resp.socialnetwork=="Twitter"){
+						//$("<li role=\"presentation\"><a href=\"#muestraTL\" onclick=\"javascript:showDiv('muestraTL');getTimeline();\">Mostrar L&iacute;nea de Tiempo</a></li>").prependTo('#links');
+						//$("<li role=\"presentation\"><a href=\"#tweets\" onclick=\"javascript:showDiv('tweets');ownTweets();\">Mostrar Tweets</a></li>").prependTo('#links');
+						$("#redes_sociales").append($('<option>', {
+							value: "twitter",
+							text: "Twitter"
+						}));
+						$("#sptw").css("display", "block");
+					}
+					
+					if (resp.socialnetwork=="Facebook"){
+						//$("<li role=\"presentation\"><a href=\"#fbTL\" onclick=\"javascript:showDiv('fbTL');getTimelineFB();\">Mostrar Muro General Facebook</a></li>").prependTo('#links');
+						//$("<li role=\"presentation\"><a href=\"#fbposts\" onclick=\"javascript:showDiv('fbposts');ownFBPs();\">Mostrar Mensajes Propios Facebook</a></li>").prependTo('#links');
+						$("#redes_sociales").append($('<option>', {
+							value: "facebook",
+							text: "Facebook"
+						}));
+						$("#spfb").css("display", "block");
+					}
+					
+					/*if ($("#redes_sociales").length == 2) {
+						alert("hola");
+						$("#redes_sociales").prepend($('<option>', {
+							value: "todas",
+							text: "Todas las redes sociales",
+							selected: true
+						}));
+					}*/	
+					
+					if ((resp.socialnetwork=="Twitter") || (resp.socialnetwork=="Facebook")){
+						$('#notifier2').hide();
+						$('#test').show();
+					}
+				 },
+				 error: function(e) {
+					console.log(e);
+				 }
+			});
+			return check;
+		}
+	
+	//FACEBOOK TEST	
+		function mensajesFacebook(){
+			
+			var fbs = [];
+			var userSF=JSON.parse(Cookies.get('globals')).currentUser.username;
+			
+			 $.ajax({
+				 type: "GET",
+				 url: "http://socialfocus.com.ar:8080/api/face/UserTimeline/" + userSF,
+				 dataType: 'json',
+				 timeout: 600000,
+				 success:  function(resp){
+					fbs=resp;
+					//alert(JSON.stringify(fbs[0],null,4));
+					 var content="";
+					for (i = 0; i<=fbs.length-1;i++){
+						//content += "<div class='post'><strong>"+fbs[i].from.name+"</strong><br /><br />";
+						content += "<div class='post'><img class='rslogo' src='images/facebook_icon2.png' /><img class= 'profileimage' src='prof_test.png' /><p class='nickname'>Nickname</p>";
+						content +="<p class='content'>"
+						if ((fbs[i].message != null)){ 
+							content+= fbs[i].message;
+						}
+						content += "</p><div class='vals'><span class='plus'>+</span></div><p>&nbsp;</p>";
+						//if (fbs[i].picture != null){
+						//	content+= "<img class='fbpImg' src='"+fbs[i].picture+"' /> <br />"
+						//}
+						content+="</div>";
+					}
+					$('#contenido_mensajes').html(content);
+				 },
+				 error: function(e) {
+					 $('#contenido_mensajes').html("Obtencion de posteos fallo");
+				 }
+			 });
+		}
+		
+	/*	<div id="post">
+<img class="rslogo" src="../../images/facebook_icon2.png" />
+<img class= "profileimage" src="prof_test.png" />
+<p class="nickname">Damian Rivas</p>
+<p class="content">Contenido post Contenido postContenido postContenido postContenido postContenido postContenido postContenido postContenido postContenido postContenido postContenido postContenido postContenido postContenido post</p>
+<div class="vals"><span class="plus">+</span></div>
+<p>&nbsp;</p>
+</div>*/
+
+		//OBTENER TIMELINE GENERAL
+		function getTimelineFB(){
+			
+			var fbs = [];
+			
+			var userSF=JSON.parse(Cookies.get('globals')).currentUser.username;
+			
+			 $.ajax({
+				 type: "GET",
+				 url: "http://socialfocus.com.ar:8080/api/face/email/" + userSF,
+				 dataType: 'json',
+				 timeout: 600000,
+				 success:  function(resp){
+					fbs=resp;
+					//alert(JSON.stringify(fbs,null,4));
+					var content="";
+					for (i = 0; i<=fbs.length-1;i++){
+						content += "<div class='post'><strong>"+fbs[i].from.name+"</strong><br /><br />";
+						if (fbs[i].message != null){ 
+							content+= fbs[i].message+"<br />";
+						}
+						if (fbs[i].picture != null){
+							content+= "<img class='fbpImg' src='"+fbs[i].picture+"' /> <br />"
+						}
+						content+="</div>";
+					}
+			 
+					$('#fbTL').html(content);
+					getTimelineFB();
+										
+				 },
+				 error: function(e) {
+					 $('#fbTL').html("Obtencion de Timeline fallo");
+				 }
+			 });
+			
+		}
+				
+	//TWITTER TEST
+	
+		function mensajesTwiter(){
 			var twits = [];
 			
 			//HARCODEO:
 			var user="SocialFocus"; 
-			var userSF="damian@prueba.com";
+			var userSF=JSON.parse(Cookies.get('globals')).currentUser.username;
 			
 			 $.ajax({
 				 type: "GET",
-				 url: "http://localhost:8080/api/tweets/UserTimeline/_" + user +"?email="+ userSF,
+				 url: "http://socialfocus.com.ar:8080/api/tweets/UserTimeline/_" + user +"?email="+ userSF,
 				 dataType: 'json',
 				 timeout: 600000,
 				 success:  function(resp){
@@ -171,37 +533,45 @@
 					//alert(JSON.stringify(twits[0],null,4));
 					 var content="";
 					for (i = 0; i<=twits.length-1;i++){
-						content += "<div class='post'><img class='profileimage' src='"+twits[i].user.profileImageURL+"' /><strong>"+twits[i].user.name+"</strong><br />"+twits[i].text+"</div>";
+						content += "<div class='post'><img class='rslogo' src='images/twit_icon2.png' /><img class='profileimage' src='"+twits[i].user.profileImageURL+"' /><p class='nickname'>"+twits[i].user.name+"</p><p class='content'>"+twits[i].text+"</p><div class='vals'><span class='plus'>+</span></div><p>&nbsp;</p></div>";
 					}
 			 
-					$('#tweets').html(content);
+					$('#contenido_mensajes').html(content);
 					
 					
 				 },
 				 error: function(e) {
-					 $('#tweets').html("Obtencion de Tweets fallo");
+					 $('#contenido_mensajes').html("Obtencion de Tweets fallo");
 				 }
 			 });
 		}
+		
+			/*	<div id="post">
+<img class="rslogo" src="../../images/facebook_icon2.png" />
+<img class= "profileimage" src="prof_test.png" />
+<p class="nickname">Damian Rivas</p>
+<p class="content">Contenido post Contenido postContenido postContenido postContenido postContenido postContenido postContenido postContenido postContenido postContenido postContenido postContenido postContenido postContenido post</p>
+<div class="vals"><span class="plus">+</span></div>
+<p>&nbsp;</p>
+</div>*/
 
 		//OBTENER TIMELINE GENERAL
 		function getTimeline(){
 			
 			var twits = [];
 			
-			//HARCODEO:
-			var userSF="damian@prueba.com";
+			var userSF=JSON.parse(Cookies.get('globals')).currentUser.username;
 			
 			 $.ajax({
 				 type: "GET",
-				 url: "http://localhost:8080/api/tweets/email/" + userSF,
+				 url: "http://socialfocus.com.ar:8080/api/tweets/email/" + userSF,
 				 dataType: 'json',
 				 timeout: 600000,
 				 success:  function(resp){
 					twits=resp;
 					 var content="";
 					for (i = 0; i<=twits.length-1;i++){
-						content += "<img src='"+twits[i].user.profileImageURL+"' align='left' /><strong>"+twits[i].user.name+"</strong><br /><br />"+twits[i].text+"<br /> <br />";
+						content += "<div class='post'><img class='profileimage' src='"+twits[i].user.profileImageURL+"' /><strong>"+twits[i].user.name+"</strong><br />"+twits[i].text+"</div>";
 					}
 			 
 					$('#muestraTL').html(content);
@@ -217,19 +587,49 @@
 		
 		function procesar(){
 			
-			//usuario hardcodeado
-			 var userSF="damian@prueba.com";
+			 var userSF=JSON.parse(Cookies.get('globals')).currentUser.username;
 			
-			var datos = {}
+			 var datos = {}
 			 datos["email"] = userSF;
-			 datos["socialnetwork"]= "Twitter";
-			 datos["texto"]= $('#post').val();
+			 datos["texto"]= $('#mensaje_nuevo').val();
+			 
+			 //chequea los checkbox marcados
+			 
+			 if (($('#chfb').prop('checked')) && ($('#chtw').prop('checked'))){
+				alert("Postear en Twitter y Facebook");
+				if (($('#mensaje_nuevo').val().length)<=140){	
+					datos["socialnetwork"]= "Twitter";
+					creaPost("http://socialfocus.com.ar:8080/api/tweets/Create",datos);
+				}else{
+					alert("No puede generarse la publicación en Twitter debido a que la misma excede los 140 caracteres.");
+				}
+				datos["socialnetwork"]= "Facebook";
+				creaPost("http://socialfocus.com.ar:8080/api/face/Create",datos);
+			 } else if (($('#chfb').prop('checked')) && !($('#chtw').prop('checked'))){
+				alert("Postear en Facebook");
+				datos["socialnetwork"]= "Facebook";
+				creaPost("http://socialfocus.com.ar:8080/api/face/Create",datos);
+			 } else if (!($('#chfb').prop('checked')) && ($('#chtw').prop('checked'))){
+				alert("Postear en Twitter");
+				if (($('#mensaje_nuevo').val().length)<=140){	
+					datos["socialnetwork"]= "Twitter";
+					creaPost("http://socialfocus.com.ar:8080/api/tweets/Create",datos);
+				}else{
+					alert("No puede generarse la publicación en Twitter debido a que la misma excede los 140 caracteres.");
+				}
+			 } else {
+				alert("Ninguno seleccionado!");
+			 }
 			 
 	 
-			 $.ajax({
+
+		}
+		
+		function creaPost(urlapi,datos){
+			$.ajax({
 				 type: "POST",
 				 contentType: "application/json",
-				 url: "http://localhost:8080/api/tweets/Create",
+				 url: urlapi,
 				 data: JSON.stringify(datos),
 				 dataType: 'json',
 				 timeout: 600000,
@@ -241,6 +641,8 @@
 					 alert("ERROR");
 				 }
 			 });
+		
+		
 		}
 	
 	</script>

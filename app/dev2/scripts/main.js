@@ -98,7 +98,7 @@ function facebookSignin() {
 	 $('#msj').html("Acceso a Facebook satisfactorio!<br /><br />");
 	 
 	 //TEST
-	 var userSF = usuarioSesion(); 
+	 var userSF = $('#tt').val(); 
 	 var datos = {}
 	 datos["email"] = userSF;
 	 datos["socialnetwork"]= "Facebook";
@@ -138,7 +138,7 @@ function twitterSignin() {
 	 //$('#msj').html("Acceso a Twitter satisfactorio!<br /><br /><strong>Access Token:</strong> "+token+" <br /><strong>Secret:</strong> "+secret+"<br /><br />");
 	 $('#msj').html("Acceso a Twitter satisfactorio!<br /><br />");
 	  //TEST
-	 var userSF = usuarioSesion(); 
+	 var userSF = $('#tt').val(); 
 	 var datos = {}
 	 datos["email"] = userSF;
 	 datos["socialnetwork"]= "Twitter";
@@ -244,7 +244,7 @@ function twitterSignout() {
 	  unSetPic(sobutton,sibutton);
 	  
 	  //borrar token de base
-	  var userSF = usuarioSesion();
+	  var userSF = $('#tt').val();
 	  $.ajax({
 		 type: "DELETE",
 		 url: "http://localhost:8080/api/usuario/token/" + userSF + "/Twitter",
@@ -275,7 +275,7 @@ function facebookSignout() {
 	  unSetPic(sobutton,sibutton);
 	  
 	  //borrar token de base
-	  var userSF = usuarioSesion();
+	  var userSF = $('#tt').val();
 	  $.ajax({
 		 type: "DELETE",
 		 url: "http://localhost:8080/api/usuario/token/" + userSF + "/Facebook",
@@ -329,8 +329,4 @@ function unSetPic(so,si){
 	//muestra el botón de sign-in 
 	si.removeAttribute('hidden');
 
-}
-
-function usuarioSesion(){
-	return JSON.parse(Cookies.get('globals')).currentUser.username;
 }
